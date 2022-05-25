@@ -25,30 +25,26 @@
 #include "Common.h"
 #include "CommonData.h"
 #include "vector_ref.h"
+#include <memory>
 #include <string>
 
 namespace dev
 {
 // SHA-3 convenience routines.
 
-/// Calculate SHA3-256 hash of the given input and load it into the given output.
-/// @returns false if o_output.size() != 32.
-bool sha3(bytesConstRef _input, bytesRef o_output);
-
-/// Calculate SHA3-256 hash of the given input, returning as a 256-bit hash.
-inline bytes sha3(bytesConstRef _input)
+class Crypto
 {
-    bytes ret(32, 0);
-    sha3(_input, ref(ret));
-    return ret;
-}
+public:
+    using Ptr = std::shared_ptr<Crypto>;
 
-inline bytes sha3(std::string const& _input)
-{
-    return sha3(bytesConstRef(_input));
-}
+public:
+    Crypto() = default;
+    virtual ~Crypto() = default;
 
-bytes aesCBCEncrypt(bytesConstRef _plainData, bytesConstRef _key);
-bytes aesCBCDecrypt(bytesConstRef _cypherData, bytesConstRef _key);
-bytes uniformKey(bytesConstRef _readableKeyBytes);
+public:
+    virtual bytes aesCBCEncrypt(bytesConstRef _plainData, bytesConstRef _key) = 0;
+    virtual bytes aesCBCDecrypt(bytesConstRef _cypherData, bytesConstRef _key) = 0;
+    virtual bytes uniformKey(bytesConstRef _readableKeyBytes) = 0;
+};
+
 }  // namespace dev
