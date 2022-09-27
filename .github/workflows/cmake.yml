@@ -36,3 +36,15 @@ jobs:
       run: |
         cd ${{github.workspace}}/build
         make
+    - name: Zip the Build
+      run: zip key-manager.zip key-manager
+      
+    - name: release
+      uses: softprops/action-gh-release@v1
+      if: steps.tag.outputs.status == 'success' && !cancelled()
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.tag.outputs.release_tag }}
+        body_path: To do new Release.
+        files: key-manager.zip
