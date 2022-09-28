@@ -46,10 +46,10 @@ jobs:
       
     - name: release
       uses: softprops/action-gh-release@v1
-      if: steps.tag.outputs.status == 'success' && !cancelled()
+      #if: steps.tag.outputs.status == 'success' && !cancelled()
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ steps.tag.outputs.release_tag }}
+        tag_name: ${{ github.ref }}
         body_path: To do new Release.
         files: ${{github.workspace}}/build/key-manager.zip
