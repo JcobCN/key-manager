@@ -53,5 +53,5 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: ${{ github.ref }}
-        body_path: To do new Release.
+        #body_path: To do new Release.
         files: ${{github.workspace}}/build/key.zip
