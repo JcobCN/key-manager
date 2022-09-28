@@ -36,6 +36,7 @@ jobs:
       run: |
         cd ${{github.workspace}}/build
         make
+        ls -la
     - name: Zip the Build
       run: zip key-manager.zip key-manager
       
