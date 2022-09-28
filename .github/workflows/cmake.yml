@@ -36,9 +36,12 @@ jobs:
       run: |
         cd ${{github.workspace}}/build
         make
-        ls -la
+        ls key-manager -la
     - name: Zip the Build
-      run: zip key-manager.zip key-manager
+      run: |
+        pwd
+        ls
+        zip -r key-manager.zip key-manager
       
     - name: release
       uses: softprops/action-gh-release@v1
