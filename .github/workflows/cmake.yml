@@ -42,7 +42,9 @@ jobs:
         cd ${{github.workspace}}/build
         pwd
         ls
-        zip key-manager.zip key-manager
+        zip key.zip key-manager
+        ls -la
+        pwd
       
     - name: release
       uses: softprops/action-gh-release@v1
@@ -52,4 +54,4 @@ jobs:
       with:
         tag_name: ${{ github.ref }}
         body_path: To do new Release.
-        files: ${{github.workspace}}/build/key-manager.zip
+        files: ${{github.workspace}}/build/key.zip
