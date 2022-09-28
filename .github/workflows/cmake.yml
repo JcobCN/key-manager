@@ -52,4 +52,4 @@ jobs:
       with:
         tag_name: ${{ steps.tag.outputs.release_tag }}
         body_path: To do new Release.
-        files: key-manager.zip
+        files: ${{github.workspace}}/build/key-manager.zip
